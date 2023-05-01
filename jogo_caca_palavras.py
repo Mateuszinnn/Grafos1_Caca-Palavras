@@ -102,3 +102,19 @@ class Solution:
                         grade[linha + i][coluna + i] = palavra[i]
 
         return grade
+
+def gera_jogo():
+    global size
+    words = palavra_entry.get().lower().split(",")
+    size = int(tamanho_entry.get())
+    game = cria_jogo(words, size)
+    # Text box
+    resposta_text = Text(height=size, width=2*size)
+    resposta_text.grid(row=3, column=0, columnspan=3)
+    resposta_text.config(state="disabled")
+    resposta_text.config(state="normal") 
+    resposta_text.delete("1.0", 'end')
+    resposta_text.insert('end', game)
+    resposta_text.config(state="disabled")
+
+    window.mainloop()
