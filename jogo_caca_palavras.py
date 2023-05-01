@@ -66,3 +66,39 @@ class Solution:
                         sol = True
 
         return sol
+    
+    def cria_jogo(palavras: List[str], tamanho_grade: int) -> List[List[str]]:
+        # Criar uma matriz quadrada de tamanho 'tamanho_grade' por 'tamanho_grade' com letras aleatórias
+        grade = [[random.choice('abcdefghijklmnopqrstuvwxyz') for _ in range(tamanho_grade)] for _ in
+                range(tamanho_grade)]
+
+        # Colocar as palavras na matriz
+        for palavra in palavras:
+            direcoes = ['horizontal', 'vertical', 'diagonal']
+            direcao = random.choice(direcoes)
+            linha = random.randint(0, tamanho_grade - 1)
+            coluna = random.randint(0, tamanho_grade - 1)
+
+            # Verificar se é possível colocar a palavra na direção escolhida
+            palavra_valida = False
+            if direcao == 'horizontal':
+                if coluna + len(palavra) <= tamanho_grade:
+                    palavra_valida = True
+            elif direcao == 'vertical':
+                if linha + len(palavra) <= tamanho_grade:
+                    palavra_valida = True
+            elif direcao == 'diagonal':
+                if linha + len(palavra) <= tamanho_grade and coluna + len(palavra) <= tamanho_grade:
+                    palavra_valida = True
+
+            # Colocar a palavra na matriz
+            if palavra_valida:
+                for i in range(len(palavra)):
+                    if direcao == 'horizontal':
+                        grade[linha][coluna + i] = palavra[i]
+                    elif direcao == 'vertical':
+                        grade[linha + i][coluna] = palavra[i]
+                    elif direcao == 'diagonal':
+                        grade[linha + i][coluna + i] = palavra[i]
+
+        return grade
