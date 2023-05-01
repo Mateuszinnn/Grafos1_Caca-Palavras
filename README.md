@@ -24,7 +24,7 @@ Adicione 3 ou mais screenshots do projeto em funcionamento.
 Depois rode o comando:
 
 ```
-python3 src/main.py
+python3 jogo_caca_palavras.py
 ```
 
 ## Uso 
