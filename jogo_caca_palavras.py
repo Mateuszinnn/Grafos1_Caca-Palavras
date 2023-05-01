@@ -67,7 +67,7 @@ class Solution:
 
         return sol
     
-    def cria_jogo(palavras: List[str], tamanho_grade: int) -> List[List[str]]:
+def cria_jogo(palavras: List[str], tamanho_grade: int) -> List[List[str]]:
         # Criar uma matriz quadrada de tamanho 'tamanho_grade' por 'tamanho_grade' com letras aleatórias
         grade = [[random.choice('abcdefghijklmnopqrstuvwxyz') for _ in range(tamanho_grade)] for _ in
                 range(tamanho_grade)]
@@ -116,5 +116,39 @@ def gera_jogo():
     resposta_text.delete("1.0", 'end')
     resposta_text.insert('end', game)
     resposta_text.config(state="disabled")
+
+    window.mainloop()
+
+if __name__ == '__main__':
+    window = Tk()
+    window.title("Caça-Palavras")
+    window.config(padx=10, pady=10)
+
+    # Labels
+    palavra_label = Label(text="Palavras (separadas por vírgula):")
+    palavra_label.grid(row=0, column=0)
+
+    tamanho_label = Label(text="Tamanho da grade:")
+    tamanho_label.grid(row=1, column=0)
+
+    resposta_label = Label(text="Jogo:")
+    resposta_label.grid(row=2, column=0)
+
+    # Entries
+    palavra_entry = Entry(width=35)
+    palavra_entry.grid(row=0, column=1, columnspan=2)
+    palavra_entry.focus()
+
+    tamanho_entry = Entry(width=35)
+    tamanho_entry.grid(row=1, column=1, columnspan=2)
+
+    # Text box
+    resposta_text = Text(height=20, width=50)
+    resposta_text.grid(row=3, column=0, columnspan=3)
+    resposta_text.config(state="disabled")
+
+    # Button
+    add_button = Button(text="Gerar Jogo", width=36, command=gera_jogo)
+    add_button.grid(row=4, column=1, columnspan=2)
 
     window.mainloop()
